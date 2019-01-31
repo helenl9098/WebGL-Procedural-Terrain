@@ -1,1 +1,3 @@
-# hw01-noisy-terrain
+# Noisy Terrain - Hanyu Liu (liuhanyu)
+
+## Inspiration
