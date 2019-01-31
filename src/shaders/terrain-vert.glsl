@@ -226,7 +226,6 @@ void main()
   vec2 pos2d = vec2(vs_Pos.x + u_PlanePos.x, vs_Pos.z + u_PlanePos.y) + vec2(30, 100.0);
   vec3 pos3d = vec3(vs_Pos.x + u_PlanePos.x, 2.0, vs_Pos.z + u_PlanePos.y);
   fs_Sine = (sin((vs_Pos.x + u_PlanePos.x) * 3.14159 * 0.1) + cos((vs_Pos.z + u_PlanePos.y) * 3.14159 * 0.1));
-  //vec4 modelposition = vec4(vs_Pos.x, fs_Sine * 2.0, vs_Pos.z, 1.0);
   vec4 modelposition = vec4(vs_Pos.x , 2.0, vs_Pos.z, 1.0);
   
   // fbm noise value 
