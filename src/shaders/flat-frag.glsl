@@ -7,5 +7,5 @@ precision highp float;
 out vec4 out_Col;
 
 void main() {
-  out_Col = vec4(164.0 / 255.0, 233.0 / 255.0, 1.0, 1.0);
+  out_Col = vec4(230.0 / 255.0, 240.0 / 255.0, 228. / 255.0, 1.0);
 }

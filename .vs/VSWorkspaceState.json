@@ -1,0 +1,9 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\shaders"
+  ],
+  "SelectedNode": "\\src\\shaders\\terrain-frag.glsl",
+  "PreviewInSolutionExplorer": false
+}

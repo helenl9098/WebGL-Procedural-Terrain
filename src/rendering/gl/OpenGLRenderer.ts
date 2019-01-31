@@ -6,7 +6,9 @@ import ShaderProgram from './ShaderProgram';
 
 // In this file, `gl` is accessible because it is imported above
 class OpenGLRenderer {
+  m_time: number;
   constructor(public canvas: HTMLCanvasElement) {
+    this.m_time = 0;
   }
 
   setClearColor(r: number, g: number, b: number, a: number) {
@@ -31,6 +33,8 @@ class OpenGLRenderer {
     mat4.multiply(viewProj, camera.projectionMatrix, camera.viewMatrix);
     prog.setModelMatrix(model);
     prog.setViewProjMatrix(viewProj);
+    prog.setTime(this.m_time);
+    this.m_time++;
 
     for (let drawable of drawables) {
       prog.draw(drawable);
