@@ -143,11 +143,11 @@ float fbm2(vec2 p) {
 
 vec4 water(vec2 pos2d) {
   vec4 a = vec4(214, 255, 252, 1.0) / 255.;
-  vec4 b = vec4(237, 255, 252, 1.0) / 255.;
+  vec4 b = vec4(229, 252, 250, 1.0) / 255.;
   vec4 mix1 = mix(a, b, smoothstep(0.0, 0.85, ov(pos2d / 1.7)));
 
-  vec4 e1 = vec4(208, 224, 222, 1.0) / 255.;
-  vec4 f1 = vec4(229, 252, 250, 1.0) / 255.;
+  vec4 e1 = vec4(201, 216, 214, 1.0) / 255.;
+  vec4 f1 = vec4(255, 255, 255, 1.0) / 255.;
   vec4 mix2 = mix(e1, f1, smoothstep(0.0, 0.85, ov(pos2d / 1.5)));
 
   float fbmvalue = fbm(pos2d * 2.0);
@@ -266,20 +266,15 @@ void main()
   // this is the Low lands
   else if (fbm_noise > 0.45) {
     float lowlandsheight = lowlandsheight(pos2d, fbm_noise);
-    // if (lowlandsheight > 2.0) {
-    //   fs_Col = vec4(1 , 0, 0, 0);
-    // }
-    // else {
     fs_Col = lowlandscolor(pos2d, fbm_noise); 
-    //}
     modelposition = vec4(vs_Pos.x , lowlandsheight, vs_Pos.z, 1.0);
-  }
-  else if (fbm_noise > 0.35) {
-    fs_Col = algae(pos2d, fbm_noise);
   }
 
 //========================================================
   // this is the ponds
+  else if (fbm_noise > 0.35) {
+    fs_Col = algae(pos2d, fbm_noise);
+  }
   else {
     fs_Col = water(pos2d);
   }
