@@ -4,7 +4,8 @@
 ![](inspo1.jpg)
 ![](inspo2.jpg)
 
-## Live Demo Link
+## Live Demo Link 
+Zoom out :)
 https://helenl9098.github.io/hw01-noisy-terrain/
 
 ## Implementation Details
