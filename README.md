@@ -23,6 +23,11 @@ https://helenl9098.github.io/hw01-noisy-terrain/
 
 - __Water__: The color of the water is created by blending two worley noise functions together using fbm. The water also changes over time (also very subtle). This was done by plugging in u_Time into a sin equation and then adding it to a vec2 (essentially shifting it).The worley noise I used was based off of these articles: http://www.iquilezles.org/www/articles/smoothvoronoi/smoothvoronoi.htm, https://www.shadertoy.com/view/4tXSDf
 
+## Modifiable Features
+
+-_Lake Color_: As simple as it sounds! Change the color of the lake to anything you want: from mountain dew yellow to the blood of your enemies!
+-_Lake Size_: The higher the number, the bigger the lake! See happens when the lakes turn into puddles....
+
 ## External Resources
 
 - _3D Worley Noise_: https://www.shadertoy.com/view/MtXSzH
