@@ -26,4 +26,4 @@ https://helenl9098.github.io/hw01-noisy-terrain/
 
 - _3D Worley Noise_: https://www.shadertoy.com/view/MtXSzH
 - _Water like Noise_: http://www.iquilezles.org/www/articles/smoothvoronoi/smoothvoronoi.htm, https://www.shadertoy.com/view/4tXSDf
-- _Noise Changing over Time: https://thebookofshaders.com/13/
+- _Noise Changing over Time_: https://thebookofshaders.com/13/
