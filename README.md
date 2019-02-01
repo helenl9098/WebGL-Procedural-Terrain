@@ -20,10 +20,10 @@ https://helenl9098.github.io/hw01-noisy-terrain/
 - __Algae__: The shape and color of the algae are made from worley noise that change over time (very subtle!). I passed in a uniform time variable into the worley noise function using https://www.shadertoy.com/view/MtXSzH as an example.
 
 
-- __Water__: The color of the water is created by blending two worley noise functions together using fbm. The water also changes over time (also very subtle). This was done by plugging in u_Time into a sin equation and then adding it to a vec2 (essentially shifting it).The worley noise I used was based off of this article: http://www.iquilezles.org/www/articles/smoothvoronoi/smoothvoronoi.htm
+- __Water__: The color of the water is created by blending two worley noise functions together using fbm. The water also changes over time (also very subtle). This was done by plugging in u_Time into a sin equation and then adding it to a vec2 (essentially shifting it).The worley noise I used was based off of these articles: http://www.iquilezles.org/www/articles/smoothvoronoi/smoothvoronoi.htm, https://www.shadertoy.com/view/4tXSDf
 
 ## External Resources
 
 - _3D Worley Noise_: https://www.shadertoy.com/view/MtXSzH
-- _Water like Noise_: http://www.iquilezles.org/www/articles/smoothvoronoi/smoothvoronoi.htm
+- _Water like Noise_: http://www.iquilezles.org/www/articles/smoothvoronoi/smoothvoronoi.htm, https://www.shadertoy.com/view/4tXSDf
 - _Noise Changing over Time: https://thebookofshaders.com/13/
