@@ -32,6 +32,8 @@ class ShaderProgram {
   unifPlanePos: WebGLUniformLocation;
   unifTime: WebGLUniformLocation;
   uniffTime: WebGLUniformLocation;
+  unifLakeColor: WebGLUniformLocation;
+  unifLakeSize: WebGLUniformLocation;
 
   constructor(shaders: Array<Shader>) {
     this.prog = gl.createProgram();
@@ -53,12 +55,28 @@ class ShaderProgram {
     this.unifPlanePos   = gl.getUniformLocation(this.prog, "u_PlanePos");
     this.unifTime = gl.getUniformLocation(this.prog, "u_Time");
     this.uniffTime = gl.getUniformLocation(this.prog, "u_fTime");
+    this.unifLakeColor = gl.getUniformLocation(this.prog, "u_LakeColor");
+    this.unifLakeSize = gl.getUniformLocation(this.prog, "u_LakeSize");
  }
 
   use() {
     if (activeProgram !== this.prog) {
       gl.useProgram(this.prog);
       activeProgram = this.prog;
+    }
+  }
+
+  setLakeColor(color: vec4) {
+    this.use();
+    if (this.unifLakeColor !== -1) {
+      gl.uniform4fv(this.unifLakeColor, color);
+    }
+  }
+
+  setLakeSize(size: number) {
+    this.use();
+    if (this.unifLakeSize !== -1) {
+      gl.uniform1f(this.unifLakeSize, size);
     }
   }
 

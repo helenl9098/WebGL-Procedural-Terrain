@@ -1,4 +1,4 @@
-import {vec2, vec3} from 'gl-matrix';
+import {vec2, vec3, vec4} from 'gl-matrix';
 import * as Stats from 'stats-js';
 import * as DAT from 'dat-gui';
 import Square from './geometry/Square';
@@ -13,6 +13,8 @@ import ShaderProgram, {Shader} from './rendering/gl/ShaderProgram';
 const controls = {
   tesselations: 5,
   'Load Scene': loadScene, // A function pointer, essentially
+  lakecolor: [201, 216, 214, 1.0],
+  lakesize: 0.48
 };
 
 let square: Square;
@@ -82,6 +84,8 @@ function main() {
 
   // Add controls to the gui
   const gui = new DAT.GUI();
+  gui.add(controls, 'lakesize', 0.1, 0.50);
+  gui.addColor(controls, 'lakecolor');
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
@@ -141,10 +145,14 @@ function main() {
     processKeyPresses();
     renderer.render(camera, lambert, [
       plane,
-    ]);
+    ],  vec4.fromValues(controls.lakecolor[0],
+                controls.lakecolor[1],
+                controls.lakecolor[2], 1), controls.lakesize);
     renderer.render(camera, flat, [
       square,
-    ]);
+    ], vec4.fromValues(controls.lakecolor[0],
+                controls.lakecolor[1],
+                controls.lakecolor[2], 1), controls.lakesize);
     stats.end();
 
     // Tell the browser to call `tick` again whenever it renders a new frame

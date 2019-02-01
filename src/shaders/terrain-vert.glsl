@@ -6,6 +6,8 @@ uniform mat4 u_ModelInvTr;
 uniform mat4 u_ViewProj;
 uniform vec2 u_PlanePos; // Our location in the virtual world displayed by the plane
 uniform int u_Time;
+uniform vec4 u_LakeColor;
+uniform float u_LakeSize;
 
 in vec4 vs_Pos;
 in vec4 vs_Nor;
@@ -146,7 +148,8 @@ vec4 water(vec2 pos2d) {
   vec4 b = vec4(229, 252, 250, 1.0) / 255.;
   vec4 mix1 = mix(a, b, smoothstep(0.0, 0.85, ov(pos2d / 1.7)));
 
-  vec4 e1 = vec4(201, 216, 214, 1.0) / 255.;
+  //vec4 e1 = vec4(201, 216, 214, 1.0) / 255.;
+  vec4 e1 = u_LakeColor / 255.;
   vec4 f1 = vec4(255, 255, 255, 1.0) / 255.;
   vec4 mix2 = mix(e1, f1, smoothstep(0.0, 0.85, ov(pos2d / 1.5)));
 
@@ -166,7 +169,7 @@ vec4 algae(vec2 pos2d, float fbm_noise) {
 }
 
 vec4 lowlandscolor(vec2 pos2d, float fbm_noise) {
-    float normalized = (fbm_noise - 0.45) * 10.0;
+    float normalized = (fbm_noise - u_LakeSize) * (1.0 / (0.58 - u_LakeSize));
     float f = worley3D(vec3(pos2d * 0.14, 1.0));
     vec4 a = vec4(197, 198, 186, 1.0) / 255.;
     vec4 b = algae(pos2d, fbm_noise);
@@ -203,13 +206,13 @@ vec4 lowlandscolor(vec2 pos2d, float fbm_noise) {
       vec4 mix4 = mix(mix2, mix1, smoothstep(0.0, 1.0, f));
       vec4 mix5 = mix(vec4(98, 117, 104, 0) / 255., mix4, smoothstep(0.6, 1.0, 
                                           pow(normalized, 0.2)));
-      return mix(mix5, vec4(229, 252, 250, 1) / 255.0, pow(normalized, 1.5));
+      return mix(mix5, vec4(229, 252, 250, 1) / 255.0, pow(normalized, 3.0));
 
     }
 }
 
 float lowlandsheight(vec2 pos2d, float fbm_noise) {
-  float normalized = (fbm_noise - 0.45) * 10.0;
+  float normalized = (fbm_noise - u_LakeSize) * 10.0;
   float f = worley3D(vec3(pos2d * 0.14, 1.0));
   if (f > 0.58) {
     return 2.;
@@ -263,7 +266,7 @@ void main()
   
 //========================================================
   // this is the Low lands
-  else if (fbm_noise > 0.45) {
+  else if (fbm_noise > u_LakeSize) {
     float lowlandsheight = lowlandsheight(pos2d, fbm_noise);
     fs_Col = lowlandscolor(pos2d, fbm_noise); 
     modelposition = vec4(vs_Pos.x , lowlandsheight, vs_Pos.z, 1.0);
@@ -271,7 +274,7 @@ void main()
 
 //========================================================
   // this is the ponds
-  else if (fbm_noise > 0.35) {
+  else if (fbm_noise > u_LakeSize - 0.3) {
     fs_Col = algae(pos2d, fbm_noise);
   }
   else {
