@@ -26,6 +26,7 @@ https://helenl9098.github.io/hw01-noisy-terrain/
 ## Modifiable Features
 
 -_Lake Color_: As simple as it sounds! Change the color of the lake to anything you want: from mountain dew yellow to the blood of your enemies!
+
 -_Lake Size_: The higher the number, the bigger the lake! See happens when the lakes turn into puddles....
 
 ## External Resources
