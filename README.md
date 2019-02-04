@@ -5,8 +5,10 @@
 ![](inspo2.jpg)
 
 ## Live Demo Link 
-Zoom out :)
+(Scroll to zoom out and WASD to move)
+
 https://helenl9098.github.io/hw01-noisy-terrain/
+
 
 ## Implementation Details
 
