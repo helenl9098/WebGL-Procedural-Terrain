@@ -67,6 +67,7 @@ class ShaderProgram {
   }
 
   setLakeColor(color: vec4) {
+    //console.log(color);
     this.use();
     if (this.unifLakeColor !== -1) {
       gl.uniform4fv(this.unifLakeColor, color);

@@ -5980,7 +5980,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 const controls = {
     tesselations: 5,
     'Load Scene': loadScene,
-    lakecolor: [201, 216, 214, 1.0],
+    lakecolor: "#c9d8d6",
     lakesize: 0.48
 };
 let square;
@@ -6003,7 +6003,6 @@ function loadScene() {
 }
 function main() {
     window.addEventListener('keypress', function (e) {
-        // console.log(e.key);
         switch (e.key) {
             case 'w':
                 wPressed = true;
@@ -6095,12 +6094,22 @@ function main() {
         gl.viewport(0, 0, window.innerWidth, window.innerHeight);
         renderer.clear();
         processKeyPresses();
+        // based on https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+        var hexToRgb = function (hex) {
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        };
+        var result = hexToRgb(controls.lakecolor);
         renderer.render(camera, lambert, [
             plane,
-        ], __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["d" /* vec4 */].fromValues(controls.lakecolor[0], controls.lakecolor[1], controls.lakecolor[2], 1), controls.lakesize);
+        ], __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["d" /* vec4 */].fromValues(result.r, result.g, result.b, 1.0), controls.lakesize);
         renderer.render(camera, flat, [
             square,
-        ], __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["d" /* vec4 */].fromValues(controls.lakecolor[0], controls.lakecolor[1], controls.lakecolor[2], 1), controls.lakesize);
+        ], __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["d" /* vec4 */].fromValues(result.r, result.g, result.b, 1.0), controls.lakesize);
         stats.end();
         // Tell the browser to call `tick` again whenever it renders a new frame
         requestAnimationFrame(tick);
@@ -16426,6 +16435,7 @@ class ShaderProgram {
         }
     }
     setLakeColor(color) {
+        //console.log(color);
         this.use();
         if (this.unifLakeColor !== -1) {
             __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniform4fv(this.unifLakeColor, color);

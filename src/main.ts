@@ -13,7 +13,7 @@ import ShaderProgram, {Shader} from './rendering/gl/ShaderProgram';
 const controls = {
   tesselations: 5,
   'Load Scene': loadScene, // A function pointer, essentially
-  lakecolor: [201, 216, 214, 1.0],
+  lakecolor: "#c9d8d6",
   lakesize: 0.48
 };
 
@@ -40,7 +40,6 @@ function loadScene() {
 
 function main() {
   window.addEventListener('keypress', function (e) {
-    // console.log(e.key);
     switch(e.key) {
       case 'w':
       wPressed = true;
@@ -86,6 +85,7 @@ function main() {
   const gui = new DAT.GUI();
   gui.add(controls, 'lakesize', 0.1, 0.50);
   gui.addColor(controls, 'lakecolor');
+  
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
@@ -105,6 +105,7 @@ function main() {
   const renderer = new OpenGLRenderer(canvas);
   renderer.setClearColor(0 / 255.0, 0.0 / 255.0, 1.0, 1);
   gl.enable(gl.DEPTH_TEST);
+
 
   const lambert = new ShaderProgram([
     new Shader(gl.VERTEX_SHADER, require('./shaders/terrain-vert.glsl')),
@@ -143,16 +144,28 @@ function main() {
     gl.viewport(0, 0, window.innerWidth, window.innerHeight);
     renderer.clear();
     processKeyPresses();
+
+    // based on https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+    var hexToRgb = function(hex : string) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+      } : null;
+    }
+
+    var result = hexToRgb(controls.lakecolor);
     renderer.render(camera, lambert, [
       plane,
-    ],  vec4.fromValues(controls.lakecolor[0],
-                controls.lakecolor[1],
-                controls.lakecolor[2], 1), controls.lakesize);
+    ], vec4.fromValues(result.r,
+                result.g,
+                result.b, 1.0), controls.lakesize);
     renderer.render(camera, flat, [
       square,
-    ], vec4.fromValues(controls.lakecolor[0],
-                controls.lakecolor[1],
-                controls.lakecolor[2], 1), controls.lakesize);
+    ], vec4.fromValues(result.r,
+                result.g,
+                result.b, 1.0), controls.lakesize);
     stats.end();
 
     // Tell the browser to call `tick` again whenever it renders a new frame
