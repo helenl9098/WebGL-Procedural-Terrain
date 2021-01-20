@@ -7,7 +7,8 @@
 ## Live Demo Link 
 (Scroll to zoom out and WASD to move)
 
-https://helenl9098.github.io/hw01-noisy-terrain/
+https://helenl9098.github.io/WebGL-Procedural-Terrain/
+
 
 
 ## Implementation Details
